@@ -7,11 +7,12 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductoSerializer(serializers.ModelSerializer):
-    categoria = CategoriaSerializer(read_only=True)
+    imagen = serializers.ImageField(max_length=None, use_url=True)
 
     class Meta:
         model = Producto
         fields = '__all__'
+
 
 class DetallePedidoSerializer(serializers.ModelSerializer):
     producto = ProductoSerializer(read_only=True)
@@ -21,8 +22,9 @@ class DetallePedidoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PedidoSerializer(serializers.ModelSerializer):
-    productos = DetallePedidoSerializer(many=True, read_only=True)
+    detalles = DetallePedidoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Pedido
         fields = '__all__'
+
