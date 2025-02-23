@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({});
+  const [storeStatus, setStoreStatus] = useState("Cerrado");
 
   useEffect(() => {
     const targetDate = new Date("2025-04-22T00:00:00"); // Cuenta regresiva
@@ -27,15 +28,38 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Verificar si la tienda está abierta o cerrada
+  useEffect(() => {
+    const checkStoreStatus = () => {
+      const now = new Date();
+      const dayOfWeek = now.getDay();
+      const hour = now.getHours();
+  
+      if (
+        (dayOfWeek >= 1 && dayOfWeek <= 5 && hour >= 8 && hour < 18) ||  // Lunes a Viernes: 8 AM - 6 PM
+        (dayOfWeek === 6 && hour >= 9 && hour < 17)                      // Sábado: 9 AM - 5 PM
+      ) {
+        setStoreStatus("Abierto");
+      } else {
+        setStoreStatus("Cerrado");
+      }
+    };
+  
+    checkStoreStatus();
+    const interval = setInterval(checkStoreStatus, 1000 * 60);
+    return () => clearInterval(interval);
+  }, []);
+  
+
   return (
     <div className="min-h-screen bg-cover bg-center text-gray-900" style={{ backgroundImage: 'url(/images/fondo.png)' }}>
       {/* Logo en la parte superior izquierda */}
       <div className="absolute top-16 left-6 z-10">
-        <img src="/images/logo.png" alt="Logo de InArtPoint" className="w-48 h-auto" /> {/* Logo más grande */}
+        <img src="/images/logo.png" alt="Logo de InArtPoint" className="w-48 h-auto" />
       </div>
 
       {/* Navbar */}
-      <nav className="bg-green-700/90 backdrop-blur-md text-white py-4 shadow-lg">
+      <nav className="bg-[#B1C41B]/90 backdrop-blur-md text-white py-4 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
           <h1 className="text-3xl font-bold">InArtPoint</h1>
           <div className="space-x-6 text-lg">
@@ -52,16 +76,28 @@ export default function Home() {
         <div className="bg-white/90 backdrop-blur-lg p-10 rounded-lg shadow-xl inline-block text-gray-800">
           <h2 className="text-5xl font-extrabold">Bienvenido a InArtPoint</h2>
           <p className="text-lg mt-4">Encuentra los mejores productos de arte y diseño para tu hogar y oficina.</p>
-          <Link href="/productos" className="mt-6 inline-block py-3 px-8 bg-green-600 text-white font-semibold rounded-full shadow-lg hover:bg-green-700 transition">
+          <Link href="/productos" className="mt-6 inline-block py-3 px-8 bg-[#B1C41B] text-white font-semibold rounded-full shadow-lg hover:bg-[#9a9e12] transition">
             Ver Productos
           </Link>
         </div>
       </section>
 
+      {/* Estado de la tienda (más abajo y sin cuadro de fondo) */}
+      <div className="absolute top-32 right-10 text-center text-3xl font-semibold text-[#B1C41B]">
+        <h3 className="text-3xl font-semibold text-[#B1C41B]">Estado de la tienda</h3>
+        <div className="mt-4 text-3xl font-bold text-gray-800">
+          {storeStatus === "Abierto" ? (
+            <span className="text-green-600">Abierto</span>
+          ) : (
+            <span className="text-red-600">Cerrado</span>
+          )}
+        </div>
+      </div>
+
       {/* Sobre Nosotros */}
       <section id="sobre-nosotros" className="py-20">
         <div className="max-w-5xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-semibold mb-8 text-green-700">Sobre Nosotros</h2>
+          <h2 className="text-4xl font-semibold mb-8 text-[#B1C41B]">Sobre Nosotros</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg">
               <p className="text-xl">
@@ -79,9 +115,9 @@ export default function Home() {
 
       {/* Redes Sociales */}
       <section id="redes-sociales" className="py-20 text-center">
-        <h2 className="text-4xl font-semibold mb-6 text-green-700">Síguenos en Redes Sociales</h2>
+        <h2 className="text-4xl font-semibold mb-6 text-[#B1C41B]">Síguenos en Redes Sociales</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-center">
-          {[
+          {[ 
             { href: "https://www.facebook.com/share/19z2BQYsUe/", src: "/images/facebook.png", alt: "Facebook", name: "InArtPoint" },
             { href: "https://www.instagram.com/inartpoint?igsh=MTJ3cWR4cmg0ZnZ0bw==", src: "/images/instagram.png", alt: "Instagram", name: "InArtPoint" },
             { href: "mailto:inartpoint@gmail.com?subject=Consulta&body=Hola, quisiera más información.", src: "/images/gmail.png", alt: "Gmail", name: "inartpoint@gmail.com" },
@@ -97,16 +133,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Cuenta Regresiva */}
-      <div className="absolute top-10 right-10 bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg w-72 text-center">
-        <h3 className="text-3xl font-semibold text-green-700">Próximamente</h3>
+      {/* Cuenta Regresiva (movida a la esquina inferior izquierda) */}
+      <div className="absolute bottom-10 left-10 bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg w-72 text-center">
+        <h3 className="text-3xl font-semibold text-[#B1C41B]">Próximamente</h3>
         <div className="mt-4 text-3xl font-bold text-gray-800">
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="text-gray-800 py-6 bg-green-700/90 backdrop-blur-md text-white">
+      <footer className="text-gray-800 py-6 bg-[#B1C41B]/90 backdrop-blur-md text-white">
         <div className="max-w-7xl mx-auto text-center">
           <p>&copy; 2025 InArtPoint. Todos los derechos reservados.</p>
         </div>
