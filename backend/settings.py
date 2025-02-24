@@ -136,3 +136,6 @@ import os
 # Ruta absoluta donde se almacenan los archivos subidos
 MEDIA_URL = '/media/'  # URL para acceder a los archivos
 MEDIA_ROOT = os.path.join(BASE_DIR, 'productos')  # Ruta absoluta a 'productos' en 'backend'
+
+
+ALLOWEB_HOSTS = ['localhost','web-production-64b21.up.railway.app']
