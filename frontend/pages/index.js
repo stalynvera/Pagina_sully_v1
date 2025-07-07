@@ -6,7 +6,7 @@ export default function Home() {
   const [storeStatus, setStoreStatus] = useState("Cerrado");
 
   useEffect(() => {
-    const targetDate = new Date("2025-04-22T00:00:00"); // Cuenta regresiva
+    const targetDate = new Date("2025-08-22T00:00:00");
     const interval = setInterval(() => {
       const now = new Date();
       const diff = targetDate - now;
@@ -28,7 +28,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Verificar si la tienda está abierta o cerrada
   useEffect(() => {
     const checkStoreStatus = () => {
       const now = new Date();
@@ -36,8 +35,8 @@ export default function Home() {
       const hour = now.getHours();
   
       if (
-        (dayOfWeek >= 1 && dayOfWeek <= 5 && hour >= 8 && hour < 18) ||  // Lunes a Viernes: 8 AM - 6 PM
-        (dayOfWeek === 6 && hour >= 9 && hour < 17)                      // Sábado: 9 AM - 5 PM
+        (dayOfWeek >= 1 && dayOfWeek <= 5 && hour >= 8 && hour < 18) ||
+        (dayOfWeek === 6 && hour >= 9 && hour < 17)
       ) {
         setStoreStatus("Abierto");
       } else {
@@ -49,102 +48,194 @@ export default function Home() {
     const interval = setInterval(checkStoreStatus, 1000 * 60);
     return () => clearInterval(interval);
   }, []);
-  
 
   return (
-    <div className="min-h-screen bg-cover bg-center text-gray-900" style={{ backgroundImage: 'url(/images/fondo.png)' }}>
-      {/* Logo en la parte superior izquierda */}
-      <div className="absolute top-16 left-6 z-10">
-        <img src="/images/logo.png" alt="Logo de InArtPoint" className="w-48 h-auto" />
+    <div className="min-h-screen bg-cover bg-center text-gray-900 relative" style={{ backgroundImage: 'url(/images/fondo.png)' }}>
+      {/* Logo con mejor posición y sombra */}
+      <div className="absolute top-20 left-6 z-10">
+        <img 
+          src="/images/logo.png" 
+          alt="Logo de InArtPoint" 
+          className="w-40 h-auto drop-shadow-lg hover:scale-105 transition-transform duration-300" 
+        />
       </div>
 
-      {/* Navbar */}
-      <nav className="bg-[#B1C41B]/90 backdrop-blur-md text-white py-4 shadow-lg">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
-          <h1 className="text-3xl font-bold">InArtPoint</h1>
-          <div className="space-x-6 text-lg">
-            <Link href="/productos" className="hover:text-gray-300">Productos</Link>
-            <Link href="/categorias" className="hover:text-gray-300">Categorías</Link>
-            <Link href="#sobre-nosotros" className="hover:text-gray-300">Sobre Nosotros</Link>
-            <Link href="#redes-sociales" className="hover:text-gray-300">Redes Sociales</Link>
+      {/* Navbar mejorado */}
+      <nav className="bg-[#B1C41B]/90 backdrop-blur-md text-white py-4 shadow-lg sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 gap-4">
+          <h1 className="text-3xl font-bold tracking-tight">InArtPoint</h1>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-lg">
+            <Link href="/productos" className="hover:text-gray-300 transition-colors duration-200 px-2 py-1 rounded hover:bg-white/10">Productos</Link>
+            <Link href="/categorias" className="hover:text-gray-300 transition-colors duration-200 px-2 py-1 rounded hover:bg-white/10">Categorías</Link>
+            <Link href="#sobre-nosotros" className="hover:text-gray-300 transition-colors duration-200 px-2 py-1 rounded hover:bg-white/10">Sobre Nosotros</Link>
+            <Link href="#redes-sociales" className="hover:text-gray-300 transition-colors duration-200 px-2 py-1 rounded hover:bg-white/10">Redes Sociales</Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center py-24">
-        <div className="bg-white/90 backdrop-blur-lg p-10 rounded-lg shadow-xl inline-block text-gray-800">
-          <h2 className="text-5xl font-extrabold">Bienvenido a InArtPoint</h2>
-          <p className="text-lg mt-4">Encuentra los mejores productos de arte y diseño para tu hogar y oficina.</p>
-          <Link href="/productos" className="mt-6 inline-block py-3 px-8 bg-[#B1C41B] text-white font-semibold rounded-full shadow-lg hover:bg-[#9a9e12] transition">
-            Ver Productos
-          </Link>
-        </div>
-      </section>
-
-      {/* Estado de la tienda (más abajo y sin cuadro de fondo) */}
-      <div className="absolute top-32 right-10 text-center text-3xl font-semibold text-[#B1C41B]">
-        <h3 className="text-3xl font-semibold text-[#B1C41B]">Estado de la tienda</h3>
-        <div className="mt-4 text-3xl font-bold text-gray-800">
-          {storeStatus === "Abierto" ? (
-            <span className="text-green-600">Abierto</span>
-          ) : (
-            <span className="text-red-600">Cerrado</span>
-          )}
+{/* Hero Section mejorada */}
+<section className="relative pt-32 pb-24 px-4">
+  <div className="bg-white/90 backdrop-blur-lg p-8 md:p-12 rounded-lg shadow-2xl max-w-4xl mx-auto text-gray-800 transform transition-all duration-500 hover:shadow-2xl hover:scale-[1.01] text-center"> {/* Agregado text-center aquí */}
+    <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#B1C41B] drop-shadow-sm">Bienvenido a InArtPoint</h2>
+    <p className="text-lg md:text-xl mt-4 mb-8 leading-relaxed">
+      Descubre una colección exclusiva de productos de arte y diseño que transformarán tus espacios. 
+      Calidad, creatividad y personalización en cada pieza.
+    </p>
+    <div className="flex justify-center"> {/* Contenedor flex para centrar */}
+      <Link 
+        href="/productos" 
+        className="mt-6 py-3 px-8 bg-[#B1C41B] text-white font-semibold rounded-full shadow-lg hover:bg-[#9a9e12] transition-all duration-300 hover:scale-105 hover:shadow-xl"
+      >
+        Explorar Catálogo
+      </Link>
+    </div>
+  </div>
+</section>
+      {/* Estado de la tienda con mejor diseño */}
+      <div className="fixed top-32 right-4 md:right-10 z-10">
+        <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-md border-l-4 border-[#B1C41B]">
+          <h3 className="text-xl font-semibold text-gray-700">Estado de la tienda</h3>
+          <div className="mt-2 text-2xl font-bold">
+            {storeStatus === "Abierto" ? (
+              <span className="text-green-600 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                Abierto
+              </span>
+            ) : (
+              <span className="text-red-600 flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                Cerrado
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Sobre Nosotros */}
-      <section id="sobre-nosotros" className="py-20">
-        <div className="max-w-5xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-semibold mb-8 text-[#B1C41B]">Sobre Nosotros</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg">
-              <p className="text-xl">
-                En InArtPoint, creemos que cada detalle importa y que los momentos especiales merecen ser únicos. Nos apasiona crear productos personalizados que reflejen tu estilo, emociones e ideas, convirtiéndolos en algo más que simples objetos: verdaderas experiencias significativas.
-              </p>
-            </div>
-            <div className="bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg">
-              <p className="text-xl">
-                Ofrecemos una amplia variedad de artículos personalizados, desde glass cans, termos, camisetas, tazas y cuadros, entre otros. Cada pieza es diseñada con dedicación y fabricada con materiales de alta calidad para garantizar un acabado excepcional.
-              </p>
-            </div>
+{/* Sobre Nosotros con mejor estructura */}
+<section id="sobre-nosotros" className="py-16 md:py-24 px-4">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#B1C41B] relative">
+      <span className="relative inline-block">
+        Sobre Nosotros
+        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#B1C41B]/50 transform -translate-y-1"></span>
+      </span>
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B] text-center"> {/* Añadido text-center */}
+        <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestra Filosofía</h3>
+        <p className="text-lg leading-relaxed">
+          En InArtPoint, creemos que cada detalle importa. Transformamos objetos cotidianos en piezas únicas que cuentan historias. 
+          Nuestros productos no solo decoran espacios, sino que también inspiran emociones y crean conexiones.
+        </p>
+      </div>
+      <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B] text-center"> {/* Añadido text-center */}
+        <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestros Productos</h3>
+        <p className="text-lg leading-relaxed">
+          Desde glass cans y termos hasta camisetas y cuadros personalizados, cada artículo es diseñado con pasión y fabricado 
+          con materiales premium. Ofrecemos durabilidad, estilo y ese toque personal que hace la diferencia.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Redes Sociales mejor organizadas */}
+      <section id="redes-sociales" className="py-16 md:py-24 px-4 bg-[#B1C41B]/10">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#B1C41B]">
+            Conéctate Con Nosotros
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {[ 
+              { 
+                href: "https://www.facebook.com/share/19z2BQYsUe/", 
+                src: "/images/facebook.png", 
+                alt: "Facebook", 
+                name: "InArtPoint",
+                desc: "Síguenos para novedades"
+              },
+              { 
+                href: "https://www.instagram.com/inartpoint?igsh=MTJ3cWR4cmg0ZnZ0bw==", 
+                src: "/images/instagram.png", 
+                alt: "Instagram", 
+                name: "@inartpoint",
+                desc: "Descubre nuestro trabajo"
+              },
+              { 
+                href: "mailto:inartpoint@gmail.com?subject=Consulta&body=Hola, quisiera más información.", 
+                src: "/images/gmail.png", 
+                alt: "Gmail", 
+                name: "inartpoint@gmail.com",
+                desc: "Contáctanos directamente"
+              },
+              { 
+                href: "https://www.tiktok.com/@inartpoint?_t=ZM-8u8jpMRErtV&_r=1", 
+                src: "/images/tik-tok.png", 
+                alt: "TikTok", 
+                name: "@inartpoint",
+                desc: "Mira nuestros videos"
+              },
+            ].map(({ href, src, alt, name, desc }) => (
+              <div key={alt} className="flex flex-col items-center bg-white/90 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <a href={href} target="_blank" rel="noopener noreferrer" className="mb-4 transition duration-300 hover:scale-110">
+                  <img src={src} alt={alt} className="w-14 h-14 object-contain mx-auto" />
+                </a>
+                <h4 className="text-xl font-bold text-gray-800 mb-1">{name}</h4>
+                <p className="text-gray-600 text-sm text-center">{desc}</p>
+                <a 
+                  href={href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-3 text-[#B1C41B] font-medium hover:underline text-sm"
+                >
+                  Visitar ahora
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Redes Sociales */}
-      <section id="redes-sociales" className="py-20 text-center">
-        <h2 className="text-4xl font-semibold mb-6 text-[#B1C41B]">Síguenos en Redes Sociales</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-center">
-          {[ 
-            { href: "https://www.facebook.com/share/19z2BQYsUe/", src: "/images/facebook.png", alt: "Facebook", name: "InArtPoint" },
-            { href: "https://www.instagram.com/inartpoint?igsh=MTJ3cWR4cmg0ZnZ0bw==", src: "/images/instagram.png", alt: "Instagram", name: "InArtPoint" },
-            { href: "mailto:inartpoint@gmail.com?subject=Consulta&body=Hola, quisiera más información.", src: "/images/gmail.png", alt: "Gmail", name: "inartpoint@gmail.com" },
-            { href: "https://www.tiktok.com/@inartpoint?_t=ZM-8u8jpMRErtV&_r=1", src: "/images/tik-tok.png", alt: "TikTok", name: "@inartpoint" },
-          ].map(({ href, src, alt, name }) => (
-            <div key={alt} className="flex flex-col items-center">
-              <a href={href} target="_blank" rel="noopener noreferrer" className="transition duration-300 hover:scale-110 transform">
-                <img src={src} alt={alt} className="w-16 h-16 object-contain mx-auto" />
-              </a>
-              <p className="mt-2 text-xl font-bold text-gray-800">{name}</p>
+      {/* Cuenta Regresiva con mejor diseño */}
+      <div className="fixed bottom-6 left-6 z-10">
+        <div className="bg-white/95 backdrop-blur-md p-5 rounded-xl shadow-xl border-2 border-[#B1C41B] transform hover:scale-105 transition-transform duration-300">
+          <h3 className="text-xl font-bold text-[#B1C41B] mb-2">Lanzamiento Especial</h3>
+          <div className="grid grid-cols-4 gap-2 text-center">
+            <div className="bg-gray-100/80 p-2 rounded">
+              <div className="text-2xl font-bold text-gray-800">{timeLeft.days}</div>
+              <div className="text-xs text-gray-600">Días</div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Cuenta Regresiva (movida a la esquina inferior izquierda) */}
-      <div className="absolute bottom-10 left-10 bg-gray-200/90 backdrop-blur-lg p-6 rounded-lg shadow-lg w-72 text-center">
-        <h3 className="text-3xl font-semibold text-[#B1C41B]">Próximamente</h3>
-        <div className="mt-4 text-3xl font-bold text-gray-800">
-          {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+            <div className="bg-gray-100/80 p-2 rounded">
+              <div className="text-2xl font-bold text-gray-800">{timeLeft.hours}</div>
+              <div className="text-xs text-gray-600">Horas</div>
+            </div>
+            <div className="bg-gray-100/80 p-2 rounded">
+              <div className="text-2xl font-bold text-gray-800">{timeLeft.minutes}</div>
+              <div className="text-xs text-gray-600">Min</div>
+            </div>
+            <div className="bg-gray-100/80 p-2 rounded">
+              <div className="text-2xl font-bold text-gray-800">{timeLeft.seconds}</div>
+              <div className="text-xs text-gray-600">Seg</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="text-gray-800 py-6 bg-[#B1C41B]/90 backdrop-blur-md text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <p>&copy; 2025 InArtPoint. Todos los derechos reservados.</p>
+      {/* Footer mejorado */}
+      <footer className="bg-[#B1C41B]/90 backdrop-blur-md text-white py-8 mt-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-xl font-bold">InArtPoint</div>
+            <div className="flex gap-6">
+              <Link href="/politica-privacidad" className="hover:text-gray-300 transition-colors">Política de Privacidad</Link>
+              <Link href="/terminos" className="hover:text-gray-300 transition-colors">Términos de Servicio</Link>
+              <Link href="/contacto" className="hover:text-gray-300 transition-colors">Contacto</Link>
+            </div>
+          </div>
+          <div className="mt-6 text-center text-sm">
+            <p>&copy; {new Date().getFullYear()} InArtPoint. Todos los derechos reservados.</p>
+            <p className="mt-1">Diseñado con pasión en Ecuador</p>
+          </div>
         </div>
       </footer>
     </div>
