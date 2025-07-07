@@ -164,7 +164,7 @@ export default function Productos() {
           className={`p-4 rounded-xl shadow-md transition-all duration-300 text-center ${selectedCategoria === categoria.id ? 'bg-[#B1C41B] text-white' : 'bg-white/90 hover:bg-[#B1C41B]/20'}`}
           onClick={() => handleSelectCategoria(categoria.id, categoria.nombre)}
         >
-          <h3 className="font-medium">{categoria.nombre}</h3>
+          <h3 className="font-medium text-black">{categoria.nombre}</h3>
         </button>
       ))
     )}

@@ -73,20 +73,24 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section mejorada */}
-      <section className="relative pt-32 pb-24 px-4">
-        <div className="bg-white/90 backdrop-blur-lg p-8 md:p-12 rounded-lg shadow-2xl max-w-4xl mx-auto text-gray-800 transform transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#B1C41B] drop-shadow-sm">Bienvenido a InArtPoint</h2>
-          <p className="text-lg md:text-xl mt-4 mb-8 leading-relaxed">
-            Descubre una colección exclusiva de productos de arte y diseño que transformarán tus espacios. 
-            Calidad, creatividad y personalización en cada pieza.
-          </p>
-          <Link href="/productos" className="mt-6 inline-block py-3 px-8 bg-[#B1C41B] text-white font-semibold rounded-full shadow-lg hover:bg-[#9a9e12] transition-all duration-300 hover:scale-105 hover:shadow-xl">
-            Explorar Catálogo
-          </Link>
-        </div>
-      </section>
-
+{/* Hero Section mejorada */}
+<section className="relative pt-32 pb-24 px-4">
+  <div className="bg-white/90 backdrop-blur-lg p-8 md:p-12 rounded-lg shadow-2xl max-w-4xl mx-auto text-gray-800 transform transition-all duration-500 hover:shadow-2xl hover:scale-[1.01] text-center"> {/* Agregado text-center aquí */}
+    <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#B1C41B] drop-shadow-sm">Bienvenido a InArtPoint</h2>
+    <p className="text-lg md:text-xl mt-4 mb-8 leading-relaxed">
+      Descubre una colección exclusiva de productos de arte y diseño que transformarán tus espacios. 
+      Calidad, creatividad y personalización en cada pieza.
+    </p>
+    <div className="flex justify-center"> {/* Contenedor flex para centrar */}
+      <Link 
+        href="/productos" 
+        className="mt-6 py-3 px-8 bg-[#B1C41B] text-white font-semibold rounded-full shadow-lg hover:bg-[#9a9e12] transition-all duration-300 hover:scale-105 hover:shadow-xl"
+      >
+        Explorar Catálogo
+      </Link>
+    </div>
+  </div>
+</section>
       {/* Estado de la tienda con mejor diseño */}
       <div className="fixed top-32 right-4 md:right-10 z-10">
         <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-md border-l-4 border-[#B1C41B]">
@@ -107,33 +111,33 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sobre Nosotros con mejor estructura */}
-      <section id="sobre-nosotros" className="py-16 md:py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#B1C41B] relative">
-            <span className="relative inline-block">
-              Sobre Nosotros
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-[#B1C41B]/50 transform -translate-y-1"></span>
-            </span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B]">
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestra Filosofía</h3>
-              <p className="text-lg leading-relaxed">
-                En InArtPoint, creemos que cada detalle importa. Transformamos objetos cotidianos en piezas únicas que cuentan historias. 
-                Nuestros productos no solo decoran espacios, sino que también inspiran emociones y crean conexiones.
-              </p>
-            </div>
-            <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B]">
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestros Productos</h3>
-              <p className="text-lg leading-relaxed">
-                Desde glass cans y termos hasta camisetas y cuadros personalizados, cada artículo es diseñado con pasión y fabricado 
-                con materiales premium. Ofrecemos durabilidad, estilo y ese toque personal que hace la diferencia.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+{/* Sobre Nosotros con mejor estructura */}
+<section id="sobre-nosotros" className="py-16 md:py-24 px-4">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#B1C41B] relative">
+      <span className="relative inline-block">
+        Sobre Nosotros
+        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#B1C41B]/50 transform -translate-y-1"></span>
+      </span>
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B] text-center"> {/* Añadido text-center */}
+        <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestra Filosofía</h3>
+        <p className="text-lg leading-relaxed">
+          En InArtPoint, creemos que cada detalle importa. Transformamos objetos cotidianos en piezas únicas que cuentan historias. 
+          Nuestros productos no solo decoran espacios, sino que también inspiran emociones y crean conexiones.
+        </p>
+      </div>
+      <div className="bg-white/90 backdrop-blur-lg p-6 md:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#B1C41B] text-center"> {/* Añadido text-center */}
+        <h3 className="text-2xl font-bold mb-4 text-gray-800">Nuestros Productos</h3>
+        <p className="text-lg leading-relaxed">
+          Desde glass cans y termos hasta camisetas y cuadros personalizados, cada artículo es diseñado con pasión y fabricado 
+          con materiales premium. Ofrecemos durabilidad, estilo y ese toque personal que hace la diferencia.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Redes Sociales mejor organizadas */}
       <section id="redes-sociales" className="py-16 md:py-24 px-4 bg-[#B1C41B]/10">
